@@ -1,9 +1,16 @@
-#include "ft_printf.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_i_maxtoa.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: elbenkri <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/11/12 06:40:59 by elbenkri          #+#    #+#             */
+/*   Updated: 2018/01/11 15:57:56 by elbenkri         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-static int	ft_abs(int nb)
-{
-	return (nb < 0 ? -nb : nb);
-}
+#include "ft_printf.h"
 
 static int	ft_count(intmax_t cpy)
 {
@@ -47,7 +54,7 @@ char		*ft_i_maxtoa(intmax_t n)
 		return (str = ft_lol());
 	}
 	i = 0;
-	flg = ft_abs(n);
+	flg = ABS(n);
 	n = (flg == 0) ? n : n * -1;
 	cpy = n;
 	i = ft_count(cpy);

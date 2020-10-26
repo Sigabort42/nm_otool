@@ -11,6 +11,17 @@
 # include <stdlib.h>
 # include "../libft/libft.h"
 
-void	nm(char *ptr);
+typedef struct		s_env
+{
+  struct section_64	*tab_saved;
+  int			i_tab_saved;
+  int			i_tab_total;
+}			t_env;
+
+void			nm(char *ptr);
+char			symbol_section(struct section_64 *tab_saved,
+				       struct nlist_64 *sym);
+char			get_letter(struct section_64 *tab_saved, struct nlist_64 *sym);
+struct section_64	*ft_realloc_mem(t_env *env);
 
 #endif

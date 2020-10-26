@@ -1,14 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strcpy.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: elbenkri <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/11/08 18:11:38 by elbenkri          #+#    #+#             */
+/*   Updated: 2017/11/08 18:16:49 by elbenkri         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
-#include <stdio.h>
 
 char	*ft_strcpy(char *dst, const char *src)
 {
 	int		i;
-	int		len;
 
 	i = 0;
-	len = ft_strlen(src);
-	while (i < len)
+	while (src[i])
 	{
 		dst[i] = src[i];
 		i++;

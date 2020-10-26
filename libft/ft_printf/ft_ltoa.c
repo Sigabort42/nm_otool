@@ -1,9 +1,16 @@
-#include "ft_printf.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_ltoa.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: elbenkri <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/11/12 06:40:59 by elbenkri          #+#    #+#             */
+/*   Updated: 2017/12/19 20:29:31 by elbenkri         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-static int	ft_abs(int nb)
-{
-	return (nb < 0 ? -nb : nb);
-}
+#include "ft_printf.h"
 
 static int	ft_count(long cpy)
 {
@@ -45,7 +52,7 @@ char		*ft_ltoa(long int n)
 	if (n < -9223372036854775807)
 		return (str = ft_lol());
 	i = 0;
-	flg = ft_abs(n);
+	flg = ABS(n);
 	n = (flg == 0) ? n : n * -1;
 	cpy = n;
 	i = ft_count(cpy);

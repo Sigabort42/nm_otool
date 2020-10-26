@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: elbenkri <elbenkri@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2020/10/21 19:49:56 by elbenkri          #+#    #+#              #
+#    Updated: 2020/10/21 19:49:59 by elbenkri         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME		=	ft_nm
 
 NAME_OTOOL	=	ft_otool
@@ -8,6 +20,7 @@ CFLAGS		=	-Wall -Wextra -Werror
 
 SRCS_NM		=	./nm/main.c \
 			./nm/nm.c \
+			./utils/utils.c \
 
 SRCS_OTOOL	=
 

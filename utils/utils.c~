@@ -1,0 +1,14 @@
+#include "../nm/nm.h"
+
+struct section_64       *ft_realloc_mem(t_env *env)
+{
+  struct section_64     *new_tab;
+  int                   i;
+
+  i = -1;
+  new_tab = malloc(env->i_tab_total * sizeof(*new_tab));
+  while (++i < env->i_tab_total)
+      new_tab[i] = env->tab_saved[i];
+  free(env->tab_saved);
+  return (new_tab);
+}

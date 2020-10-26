@@ -1,14 +1,14 @@
-# **************************************************************************** #
+#******************************************************************************#
 #                                                                              #
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jtaibi <jtaibi@student.42.fr>              +#+  +:+       +#+         #
+#    By: elbenkri <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/08 17:04:50 by elbenkri          #+#    #+#              #
-#    Updated: 2018/11/19 15:39:43 by jtaibi           ###   ########.fr        #
+#    Updated: 2018/01/31 13:59:01 by elbenkri         ###   ########.fr        #
 #                                                                              #
-# **************************************************************************** #
+#******************************************************************************#
 
 NAME			=	libft.a
 
@@ -16,13 +16,9 @@ NAME_TMP		=	tmp_libft.a
 
 CC				=	gcc
 
-CFLAGS			=	-Wall -Wextra -Werror #-g3 -fsanitize=address
+CFLAGS			=	-Wall -Wextra -Werror
 
 SRCS			=	ft_strlen.c \
-				ft_intlen.c\
-				ft_tablen.c \
-				ft_count_char.c \
-				ft_index.c \
 				ft_strcmp.c \
 				ft_strncmp.c \
 				ft_isalpha.c \
@@ -90,26 +86,6 @@ SRCS			=	ft_strlen.c \
 				ft_strcdup.c \
 				ft_strjoin_free.c \
 				get_next_line.c \
-				ft_split.c \
-				ft_strndup.c \
-				ft_btree.c \
-				ft_btree_add_node.c \
-				ft_recursive_power.c \
-				ft_l_b.c \
-				ft_str_split.c \
-				ft_str_isdigit.c \
-				ft_strsplit_charset.c \
-				ft_concat_tab.c \
-				ft_isspace.c \
-				ft_strstart.c \
-				ft_issign.c \
-				ft_getword.c \
-				read_stdin.c \
-				ft_isspace_word.c \
-				ft_strcut.c \
-				ft_strpush.c\
-				ft_strsplit_token.c\
-				ft_quotes.c
 
 OBJ			=	$(SRCS:.c=.o)
 
@@ -120,19 +96,19 @@ all: $(NAME)
 $(NAME): $(OBJ)
 	@ar rc $(NAME_TMP) $(OBJ)
 	@make -C ft_printf/
-	@libtool -static -o $(NAME) $(NAME_TMP) ft_printf/printf.a
+	@libtool -static -o $(NAME) $(NAME_TMP) ft_printf/libftprintf.a
 	@ranlib	$(NAME)
 	@rm -rf $(NAME_TMP)
-	@echo "\033[32mLibft [\033[32;5mOk\033[0m\033[32m]"
+	@echo "\033[H\033[2J\033[32;5m[OK...]"
 
 clean:
 	@make -C ft_printf/ clean
 	@rm -rf $(OBJ)
-	@echo "\033[32mLibft.o [\033[32;5mCleaned\033[0m\033[32m]"
+	@echo "\033[H\033[2J\033[32;5m[OK...]"
 
 fclean:	clean
 	@make -C ft_printf/ fclean
 	@rm -rf $(NAME)
-	@echo "\033[32mLibft [\033[32;5mCleaned\033[0m\033[32m]"
+	@echo "\033[H\033[2J\033[32;5m[OK...]"
 
 re: fclean all

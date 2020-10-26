@@ -1,9 +1,16 @@
-#include "ft_printf.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_ui_maxtoa.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: elbenkri <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/11/12 06:40:59 by elbenkri          #+#    #+#             */
+/*   Updated: 2017/12/19 20:29:31 by elbenkri         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-static int	ft_abs(int nb)
-{
-	return (nb < 0 ? -nb : nb);
-}
+#include "ft_printf.h"
 
 static int	ft_count(uintmax_t cpy)
 {
@@ -38,7 +45,7 @@ char		*ft_ui_maxtoa(uintmax_t n)
 	char			*str;
 
 	i = 0;
-	flg = ft_abs(n);
+	flg = ABS(n);
 	n = (flg == 0) ? n : n * -1;
 	cpy = n;
 	i = ft_count(cpy);

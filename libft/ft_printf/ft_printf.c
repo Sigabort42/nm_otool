@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: elbenkri <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/12/15 15:56:55 by elbenkri          #+#    #+#             */
+/*   Updated: 2018/02/02 16:53:15 by elbenkri         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
 static const t_color	g_color[] =
@@ -45,7 +57,6 @@ static int			ft_fd(const char *format, t_var *var)
 {
 	static int		i = 0;
 
-	var->fd = 1;
 	if (ft_strnequ("{fd}", &format[0], 4))
 	{
 		if (format[4] >= '0' && format[4] <= '9')

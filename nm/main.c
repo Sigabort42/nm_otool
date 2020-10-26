@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: elbenkri <elbenkri@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/10/21 19:49:24 by elbenkri          #+#    #+#             */
+/*   Updated: 2020/10/21 19:49:29 by elbenkri         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "./nm.h"
 
 int	run(char *file)
@@ -16,7 +28,6 @@ int	run(char *file)
       ft_putstr("Error fstat");
       return (fd);
     }
-
   if ((ptr = mmap(0, buf.st_size, PROT_READ, MAP_PRIVATE, fd, 0)) == MAP_FAILED)
     {
       ft_putstr("Error mmap");

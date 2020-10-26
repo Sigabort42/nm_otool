@@ -10,7 +10,7 @@
 #                                                                              #
 #******************************************************************************#
 
-NAME	=	printf.a
+NAME	=	libftprintf.a
 
 CC		=	gcc
 
@@ -65,14 +65,14 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	@ar rc $(NAME) $(OBJS)
 	@ranlib $(NAME)
-	@echo "\033[32mFt_printf [\033[32;5mOk\033[0m\033[32m]"
+	@echo "\033[H\033[2J\033[32;5m[OK...]"
 
 clean:
 	@rm -rf $(OBJS)
-	@echo "\033[32mFt_printf.o [\033[32;5mCleaned\033[0m\033[32m]"
+	@echo "\033[H\033[2J\033[32;5m[OK...]"
 
 fclean:	clean
 	@rm -rf $(NAME)
-	@echo "\033[32mFt_printf [\033[32;5mCleaned\033[0m\033[32m]"
+	@echo "\033[H\033[2J\033[32;5m[OK...]"
 
 re: fclean all
