@@ -14,7 +14,7 @@ NAME			=	libft.a
 
 NAME_TMP		=	tmp_libft.a
 
-CC				=	gcc
+CC			=	gcc
 
 CFLAGS			=	-Wall -Wextra -Werror
 
@@ -86,6 +86,7 @@ SRCS			=	ft_strlen.c \
 				ft_strcdup.c \
 				ft_strjoin_free.c \
 				get_next_line.c \
+				ft_print_base.c \
 
 OBJ			=	$(SRCS:.c=.o)
 

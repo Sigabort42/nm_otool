@@ -5,12 +5,17 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: elbenkri <elbenkri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/21 19:49:24 by elbenkri          #+#    #+#             */
-/*   Updated: 2020/10/21 19:49:29 by elbenkri         ###   ########.fr       */
+/*   Created: 2020/10/27 13:04:01 by elbenkri          #+#    #+#             */
+/*   Updated: 2020/10/27 13:04:02 by elbenkri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./nm.h"
+#include "./otool.h"
+
+void			usage()
+{
+	ft_printf("Usage: ft_otool <file>\n");
+}
 
 int			run(char *file)
 {
@@ -28,7 +33,7 @@ int			run(char *file)
 		MAP_FAILED)
 		f = -3;
 	if (!f)
-		nm(ptr);
+		otool(ptr);
 	if (munmap(ptr, buf.st_size) < 0)
 		f = -4;
 	return (f < 0) ? (f) : (0);
@@ -37,8 +42,11 @@ int			run(char *file)
 int			main(int ac, char **av)
 {
 	if (ac < 2)
-		return (run("a.out"));
+		usage();
 	else
+	{
+		ft_printf("%s\n", av[1]);
 		return (run(av[1]));
+	}
 	return (0);
 }

@@ -1,41 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   nm.c                                               :+:      :+:    :+:   */
+/*   otool.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: elbenkri <elbenkri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/21 19:49:36 by elbenkri          #+#    #+#             */
-/*   Updated: 2020/10/21 19:49:41 by elbenkri         ###   ########.fr       */
+/*   Created: 2020/10/27 13:04:18 by elbenkri          #+#    #+#             */
+/*   Updated: 2020/10/27 13:04:19 by elbenkri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./nm.h"
+#include "./otool.h"
 
-void					print_output(t_env *env,
-struct symtab_command *sym,
-char *ptr)
+void					print_output(t_env *env, char *ptr)
 {
-	char				*stringtable;
-	struct nlist_64			*el;
-	int				i;
-	char				c;
 	struct section_64		sect;
+	char				*p;
+	int				i;
+	int				j;
 
 	i = 0;
-	el = (void*)ptr + sym->symoff;
-	stringtable = (void*)ptr + sym->stroff;
-	while (i < (int)sym->nsyms)
+	j = 0;
+	env->i_section_text = 0;
+	while (i < env->i_tab_total)
 	{
-		if ((c = get_letter(env->tab_saved, &(el[i]))) != '/' && c != '-')
+		sect = env->tab_saved[i];
+		if (!ft_strcmp(sect.sectname, SECT_TEXT))
 		{
-			sect = env->tab_saved[el[i].n_sect - 1];
-			if (sect.addr)
-				ft_printf("%016llx %c %s\n", sect.addr, c,
-					stringtable + el[i].n_un.n_strx);
-			else
-				ft_printf("%18c %s\n", c,
-					stringtable + el[i].n_un.n_strx);
+				p = (void*)ptr + sect.offset;
+				while (env->i_section_text < (int)sect.size)
+				{
+					ft_printf("%016-llx      ", &(p[env->i_section_text]));
+					j = 0;
+					while (j++ < 16 &&
+					env->i_section_text < (int)sect.size)
+						ft_print_base(p[env->i_section_text++], 16);
+					ft_putstr("\n");
+				}
+				env->i_section_text = 0;
 		}
 		i++;
 	}
@@ -53,30 +55,6 @@ void					save_segment(t_env *env,
 	env->tab_saved = ft_realloc_mem(env);
 	while (i < (int)seg->nsects)
 		env->tab_saved[env->i_tab_saved++] = sect[i++];
-}
-
-void					handle_64(t_env *env, char *ptr)
-{
-	int				ncmds;
-	int				i;
-	struct mach_header_64		*header;
-	struct load_command		*lc;
-	struct symtab_command		*sym;
-
-	header = (struct mach_header_64 *)ptr;
-	ncmds = header->ncmds;
-	i = 0;
-	lc = (void *)ptr + sizeof(*header);
-	while (i++ < ncmds)
-	{
-		if (lc->cmd == LC_SYMTAB)
-		{
-			sym = (struct symtab_command *)lc;
-			print_output(env, sym, ptr);
-			break ;
-		}
-		lc = (void*)lc + lc->cmdsize;
-	}
 }
 
 void					handle_segments_64(t_env *env, char *ptr)
@@ -100,10 +78,10 @@ void					handle_segments_64(t_env *env, char *ptr)
 		}
 		lc = (void*)lc + lc->cmdsize;
 	}
-	handle_64(env, ptr);
+	print_output(env, ptr);
 }
 
-void					nm(char *ptr)
+void					otool(char *ptr)
 {
 	t_env				env;
 	unsigned int			magic_number;

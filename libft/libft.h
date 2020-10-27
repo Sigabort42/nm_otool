@@ -79,6 +79,7 @@ char				**ft_strsplit(char const *s, char c);
 char				*ft_strtrim(char const *s);
 char				*ft_strjoin(char const *s1, char const *s2);
 char				*ft_itoa(int n);
+char				*ft_print_base(unsigned int value, int base);
 t_list				*ft_lstnew(void const *content, size_t content_size);
 void				ft_lstadd(t_list **alst, t_list *new);
 void				ft_lstdel(t_list **alst, void (*del)(void *, size_t));
