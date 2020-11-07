@@ -36,9 +36,21 @@ int			run(char *file)
 
 int			main(int ac, char **av)
 {
+	int		i;
+
+	i = 1;
 	if (ac < 2)
 		return (run("a.out"));
 	else
-		return (run(av[1]));
+		while (av[i])
+		{
+			ft_printf("%s\n", av[i]);
+			if (run(av[i]))
+			{
+				ft_printf("\nError file format: %s\n", av[i]);
+				return (1);
+			}
+			i++;
+		}
 	return (0);
 }

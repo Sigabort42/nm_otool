@@ -88,6 +88,10 @@ void					handle_segments_64(t_env *env, char *ptr)
 	int				i;
 
 	header = (struct mach_header_64 *)ptr;
+	if (header->filetype == MH_DYLIB)
+		ft_printf("FILE IS DYLIB\n");
+	else if (header->filetype == MH_OBJECT)
+		ft_printf("FILE IS OBJECT\n");
 	ncmds = header->ncmds;
 	i = 0;
 	lc = (void *)ptr + sizeof(*header);
