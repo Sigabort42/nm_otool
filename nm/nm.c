@@ -13,8 +13,8 @@
 #include "./nm.h"
 
 void					print_output(t_env *env,
-struct symtab_command *sym,
-char *ptr)
+						     struct symtab_command *sym,
+						     char *ptr)
 {
 	char				*stringtable;
 	struct nlist_64			*el;
@@ -32,10 +32,10 @@ char *ptr)
 			sect = env->tab_saved[el[i].n_sect - 1];
 			if (sect.addr)
 				ft_printf("%016llx %c %s\n", sect.addr, c,
-					stringtable + el[i].n_un.n_strx);
+					  stringtable + el[i].n_un.n_strx);
 			else
 				ft_printf("%18c %s\n", c,
-					stringtable + el[i].n_un.n_strx);
+					  stringtable + el[i].n_un.n_strx);
 		}
 		i++;
 	}
