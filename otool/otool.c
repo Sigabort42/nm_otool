@@ -20,24 +20,22 @@ void					print_output(t_env *env, char *ptr)
 	int				j;
 
 	i = 0;
-	j = 0;
 	env->i_section_text = 0;
 	while (i < env->i_tab_total)
 	{
 		sect = env->tab_saved[i];
 		if (!ft_strcmp(sect.sectname, SECT_TEXT))
 		{
-				p = (void*)ptr + sect.offset;
-				while (env->i_section_text < (int)sect.size)
-				{
-					ft_printf("%016-llx      ", &(p[env->i_section_text]));
-					j = 0;
-					while (j++ < 16 &&
-					env->i_section_text < (int)sect.size)
-						ft_print_base(p[env->i_section_text++], 16);
-					ft_putstr("\n");
-				}
-				env->i_section_text = 0;
+			p = (void*)ptr + sect.offset;
+			while (env->i_section_text < (int)sect.size)
+			{
+				ft_printf("%016-llx ", sect.addr + env->i_section_text);
+				j = 0;
+				while (j++ < 16 && env->i_section_text < (int)sect.size)
+					ft_print_base(p[env->i_section_text++], 16);
+				ft_putstr("\n");
+			}
+			env->i_section_text = 0;
 		}
 		i++;
 	}

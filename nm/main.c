@@ -28,10 +28,8 @@ int			run(char *file)
 {
 	struct stat	buf;
 	int		fd;
-	int		f;
 	char		*ptr;
 
-	f = 0;
 	if ((fd = open(file, O_RDONLY)) < 0)
 		return (1);
 	if (fstat(fd, &buf) < 0)

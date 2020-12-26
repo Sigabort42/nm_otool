@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_NM_H
-# define FT_NM_H
+#ifndef FT_OTOOL_H
+# define FT_OTOOL_H
 
 # include <unistd.h>
 # include <stdio.h>
