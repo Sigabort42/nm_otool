@@ -13,8 +13,9 @@
 #include "./nm.h"
 
 void					print_output(t_env *env,
-						     struct symtab_command *sym,
-						     char *ptr)
+						struct symtab_command *sym,
+						struct mach_header_64 *header,
+						char *ptr)
 {
 	char				*stringtable;
 	struct nlist_64			*el;
@@ -30,29 +31,16 @@ void					print_output(t_env *env,
 		if ((c = get_letter(env->tab_saved, &(el[i]))) != '/' && c != '-')
 		{
 			sect = env->tab_saved[el[i].n_sect - 1];
-			if (sect.addr)
-				ft_printf("%016llx %c %s\n", sect.addr, c,
-					  stringtable + el[i].n_un.n_strx);
+			if ((c != 'U' && header->filetype == MH_OBJECT) ||
+			(c != 'U' && header->filetype != MH_OBJECT))
+				ft_printf("%016llx %c %s\n",  el[i].n_value, c,
+					stringtable + el[i].n_un.n_strx);
 			else
 				ft_printf("%18c %s\n", c,
-					  stringtable + el[i].n_un.n_strx);
+					stringtable + el[i].n_un.n_strx);
 		}
 		i++;
 	}
-}
-
-void					save_segment(t_env *env,
-					struct segment_command_64 *seg)
-{
-	struct section_64		*sect;
-	int				i;
-
-	i = 0;
-	sect = (void*)seg + sizeof(*seg);
-	env->i_tab_total += seg->nsects;
-	env->tab_saved = ft_realloc_mem(env);
-	while (i < (int)seg->nsects)
-		env->tab_saved[env->i_tab_saved++] = sect[i++];
 }
 
 void					handle_64(t_env *env, char *ptr)
@@ -72,11 +60,25 @@ void					handle_64(t_env *env, char *ptr)
 		if (lc->cmd == LC_SYMTAB)
 		{
 			sym = (struct symtab_command *)lc;
-			print_output(env, sym, ptr);
+			print_output(env, sym, header, ptr);
 			break ;
 		}
 		lc = (void*)lc + lc->cmdsize;
 	}
+}
+
+void					save_segment(t_env *env,
+						struct segment_command_64 *seg)
+{
+	struct section_64		*sect;
+	int				i;
+
+	i = 0;
+	sect = (void*)seg + sizeof(*seg);
+	env->i_tab_total += seg->nsects;
+	env->tab_saved = ft_realloc_mem(env);
+	while (i < (int)seg->nsects)
+		env->tab_saved[env->i_tab_saved++] = sect[i++];
 }
 
 void					handle_segments_64(t_env *env, char *ptr)
@@ -88,10 +90,6 @@ void					handle_segments_64(t_env *env, char *ptr)
 	int				i;
 
 	header = (struct mach_header_64 *)ptr;
-	if (header->filetype == MH_DYLIB)
-		ft_printf("FILE IS DYLIB\n");
-	else if (header->filetype == MH_OBJECT)
-		ft_printf("FILE IS OBJECT\n");
 	ncmds = header->ncmds;
 	i = 0;
 	lc = (void *)ptr + sizeof(*header);

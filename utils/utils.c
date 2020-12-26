@@ -61,7 +61,7 @@ struct section_64		*ft_realloc_mem(t_env *env)
 
 	i = -1;
 	new_tab = malloc(env->i_tab_total * sizeof(*new_tab));
-	while (++i < env->i_tab_total)
+	while (++i < env->i_tab_total && env->i_tab_saved)
 		new_tab[i] = env->tab_saved[i];
 	free(env->tab_saved);
 	return (new_tab);

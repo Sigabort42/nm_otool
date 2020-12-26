@@ -21,17 +21,16 @@ int			run(char *file)
 
 	f = 0;
 	if ((fd = open(file, O_RDONLY)) < 0)
-		f = -1;
+		return (1);
 	if (fstat(fd, &buf) < 0)
-		f = -2;
+		return (2);
 	if ((ptr = mmap(0, buf.st_size, PROT_READ, MAP_PRIVATE, fd, 0)) ==
 		MAP_FAILED)
-		f = -3;
-	if (!f)
-		nm(ptr);
+		return (3);
+	nm(ptr);
 	if (munmap(ptr, buf.st_size) < 0)
-		f = -4;
-	return (f < 0) ? (f) : (0);
+		return (4);
+	return (0);
 }
 
 int			main(int ac, char **av)
