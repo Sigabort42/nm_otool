@@ -12,6 +12,18 @@
 
 #include "./nm.h"
 
+void                    print_error(int err)
+{
+        if (err == 1)
+                ft_printf("%s\n", "Can't open file");
+	else if (err == 2)
+                ft_printf("%s\n", "Error for open file");
+	else if (err == 3)
+                ft_printf("%s\n", "Error memory");
+	else if (err == 4)
+	        ft_printf("%s\n", "Error memory free");
+}
+
 int			run(char *file)
 {
 	struct stat	buf;
@@ -36,6 +48,7 @@ int			run(char *file)
 int			main(int ac, char **av)
 {
 	int		i;
+	int		err;
 
 	i = 1;
 	if (ac < 2)
@@ -44,10 +57,10 @@ int			main(int ac, char **av)
 		while (av[i])
 		{
 			ft_printf("%s\n", av[i]);
-			if (run(av[i]))
+			if ((err = run(av[i])))
 			{
-				ft_printf("\nError file format: %s\n", av[i]);
-				return (1);
+				print_error(err);
+				return (err);
 			}
 			i++;
 		}
